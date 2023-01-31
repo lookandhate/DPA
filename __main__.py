@@ -4,4 +4,4 @@ from CSVReader import CSVReader
 
 if __name__ == '__main__':
     reader = CSVReader()
-    pprint(reader.sort_by("temperature"))
+    pprint(reader.sort_by("date"))
