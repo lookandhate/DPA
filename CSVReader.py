@@ -33,7 +33,7 @@ class CSVReader:
                     }
                 )
 
-    def sort_by(self, key: str) -> list[WeatherEntry]:
+    def sort(self, key: str) -> list[WeatherEntry]:
         return sorted(self._data, key=lambda x: x[key])
 
     def get_entries_by_criteria(self, key: str, value) -> list[WeatherEntry]:
