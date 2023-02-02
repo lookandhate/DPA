@@ -2,10 +2,10 @@ from pprint import pprint
 
 import numpy as np
 
-from utils import generate_matrix
+from utils import generate_matrix, input_vals
 
 if __name__ == '__main__':
-    m, n = map(int, input("Input m, n: ").split())
+    m, n = input_vals()
 
     matrix: np.ndarray = generate_matrix(m, n)
     max_value = matrix.max()
