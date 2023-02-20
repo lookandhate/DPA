@@ -41,3 +41,15 @@ class CSVReader:
 
     def get_entries_by_functional_criteria(self, func: Callable) -> list[WeatherEntry]:
         return [entry for entry in self._data if func(entry)]
+
+    def new_entry(self, longitude, latitude, tempature):
+        self._data.append(WeatherEntry(num=len(self._data),
+                                       longitude=longitude,
+                                       latitude=latitude,
+                                       tempature=tempature,
+                                       date=datetime.now()))
+
+    def save(self):
+        with open("new.csv", "w") as file:
+            writer = csv.writer(file)
+            writer.writerows(self._data)
