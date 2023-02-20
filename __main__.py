@@ -34,3 +34,9 @@ if __name__ == '__main__':
     print('Генератор')
     for i in reader.generator():
         print(i)
+
+    print('=' * 20)
+
+    long, lat, temp = input('Введите новые данные(Долгота, широта, температура: ').split()
+    reader.new_entry(long, lat, temp)
+    reader.save()

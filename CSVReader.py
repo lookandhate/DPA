@@ -1,6 +1,6 @@
 import csv
 from datetime import datetime
-from typing import TypedDict, Callable, Self
+from typing import TypedDict, Callable
 
 
 class WeatherEntry(TypedDict):
@@ -23,7 +23,7 @@ class CSVReader:
         self._current_row = 0
 
     @classmethod
-    def build_from_dict(cls, data: list[WeatherEntry]) -> Self:
+    def build_from_dict(cls, data: list[WeatherEntry]) -> 'Self':
         instance = cls()
         instance._data = data
         return instance
@@ -63,6 +63,19 @@ class CSVReader:
                         "date": datetime.strptime(row[4], "%Y-%m-%d %H:%M:%S"),
                     }
                 )
+
+    def new_entry(self, longitude, latitude, temperature):
+        self._data.append(WeatherEntry(num=len(self._data),
+                                       longitude=longitude,
+                                       latitude=latitude,
+                                       temperature=temperature,
+                                       date=datetime.now()))
+
+    def save(self):
+        with open("new.csv", "w") as file:
+            writer = csv.DictWriter(file, ['num', 'longitude', 'latitude', 'temperature', 'date'])
+            writer.writeheader()
+            writer.writerows(self._data)
 
     def sort(self, key: str) -> list[WeatherEntry]:
         return sorted(self._data, key=lambda x: x[key])
