@@ -27,7 +27,8 @@ class Discount(BaseModel):
     to_use = models.IntegerField("Сколько использований осталось")
     user = models.ForeignKey(UserModel, on_delete=models.SET_NULL,
                              verbose_name="Пользователь, на которого назначена скидка",
-                             null=True)
+                             null=True,
+                             related_name='user_discounts')
     is_for_everyone = models.BooleanField("Доступна ли всем?", default=False)
 
 

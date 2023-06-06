@@ -1,3 +1,6 @@
+from rest_framework import viewsets
+
+from taxi.api.serializers import RideSerializer
 from taxi.models import Ride
 
 

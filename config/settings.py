@@ -36,8 +36,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_spectacular',
+    "phonenumber_field",
     'payment',
     'taxi',
+    "user"
 ]
 
 MIDDLEWARE = [
@@ -68,6 +71,11 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
@@ -79,6 +87,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+AUTH_USER_MODEL = "user.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
