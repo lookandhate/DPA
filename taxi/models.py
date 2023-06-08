@@ -23,7 +23,8 @@ class Ride(BaseModel):
 
     time_in_road = models.IntegerField("Время в пути")
 
-    payment_method = models.ForeignKey(PaymentMethod, on_delete=models.SET_NULL, related_name='payment_method_rides', null=True)
+    payment_method = models.ForeignKey(PaymentMethod, on_delete=models.SET_NULL, related_name='payment_method_rides',
+                                       null=True)
 
     discount = models.ForeignKey("payment.Discount", on_delete=models.SET_NULL, null=True, blank=True,
                                  verbose_name="Скидка использованная в поездке")
