@@ -1,0 +1,44 @@
+version: "3.4"
+
+services:
+  db:
+    image: postgres:12
+    container_name: db
+    ports:
+      - "5432"
+    env_file:
+      - .env
+    volumes:
+      - database_volume:/var/lib/postgresql/data
+    networks:
+      - django_network
+
+  app:
+    build: .
+    container_name: app
+    environment:
+      - DJANGO_SETTINGS_MODULE
+    env_file:
+      - .env
+    command: /start-web.sh
+    volumes:
+      - /etc/static:/code/static
+      - /etc/media:/code/media
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: always
+    links:
+      - db:db
+    depends_on:
+      - db
+    networks:
+      - django_network
+
+
+
+volumes:
+  database_volume:
+
+networks:
+  django_network:
+    driver: bridge
